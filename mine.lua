@@ -62,7 +62,7 @@ TORCH_SLOT = 16
 TORCH_THRESHHOLD = 6
 
 MORE_INV_AMOUNT = 0
-MORE_INV_START_SLOT = 0 -- Has to be lower than the index
+MORE_INV_START_SLOT = 1 -- Has to be lower than the index
 
 SEARCH_STORAGE = false
 SEARCH_CHEST_SLOT = 15
@@ -417,7 +417,7 @@ SEARCH_STORAGE = get_arg_or(6, TYPES.BOOLEAN, SEARCH_STORAGE)
 
 MORE_INV_AMOUNT = get_arg_or(7, TYPES.INTEGER, MORE_INV_AMOUNT)
 
-MORE_INV_START_SLOT = get_arg_or(8, TYPES.INTEGER, MORE_INV_START_SLOT)
+MORE_INV_START_SLOT = get_arg_or(8, TYPES.INTEGER, MORE_INV_START_SLOT) - 1 -- Remove one because it has to be lower than the actual index
 SEARCH_CHEST_SLOT = get_arg_or(9, TYPES.INTEGER, SEARCH_CHEST_SLOT)
 TORCH_SLOT = get_arg_or(10, TYPES.INTEGER, TORCH_SLOT)
 
