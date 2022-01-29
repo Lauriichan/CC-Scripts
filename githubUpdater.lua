@@ -17,15 +17,21 @@ if(#args >= 2) then
 end
 local url = GITHUB_URL .. args[1] .. EXTENSION
 local result = http.get(url)
-if(result.code == 404) then
+if (!result) then
     term.setTextColor(colors.red)
-    term.error("File " .. args[1] .. " doesn't exist!")
+    print("Failed to connect to '" .. url .. "'!")
+    term.setTextColor(col)
+    return;
+end
+if(result.getResponseCode() == 404) then
+    term.setTextColor(colors.red)
+    print("File " .. args[1] .. " doesn't exist!")
     term.setTextColor(col)
     return
 end
 local content = result.readAll()
 result.close()
-if(result.code ~= 200) then
+if(result.getResponseCode() ~= 200) then
     term.setTextColor(colors.red)
     print("Couldn't download file " .. args[1] .. "!")
     print(content);
