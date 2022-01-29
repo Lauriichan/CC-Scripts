@@ -26,7 +26,8 @@ end
 
 function place(id)
     if turtle.detect() then
-        if (turtle.inspect().name == id) then
+        local _, block = turtle.inspect()
+        if (block.name == id) then
             return true
         end
         turtle.dig()
@@ -59,19 +60,25 @@ function main()
         right = true
     end 
     turtle.turnLeft()
-    for i=1,4 do
-        while true do
-            if not place(id) then
-                print("No item")
-                return
+    while true do
+        for i=1,4 do
+            while true do
+                if not place(id) then
+                    print("No item")
+                    return
+                end
+                turnSide(right)
+                if turtle.detect() then
+                    break
+                end
+                turtle.forward()
+                turnSide(not right)
             end
-            turnSide(right)
-            if turtle.detect() then
-                break
-            end
-            turtle.forward()
-            turnSide(not right)
         end
+        if turtle.detectUp() then
+            break
+        end
+        turtle.up()
     end
 end
 
