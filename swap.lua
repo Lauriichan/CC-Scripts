@@ -58,9 +58,8 @@ function main()
     turtle.turnRight()
     if turtle.detect() then
         right = true
-        turtle.turnLeft()
-        turtle.turnLeft()
-    end
+    end 
+    turtle.turnLeft()
     for i=1,4 do
         while true do
             if not place(id) then
@@ -76,3 +75,5 @@ function main()
         end
     end
 end
+
+main()
