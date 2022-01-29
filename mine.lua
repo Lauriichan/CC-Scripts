@@ -389,8 +389,8 @@ function print_config()
     print("")
     print("Calculated Fuel per Layer (x" .. FUEL_ACTION .. "): " .. AUTO_REFUEL_THRESHHOLD)
     print("==========================================")
+    print("Press enter to start...")
     term.setTextColor(color)
-    print("Press enter to continue...")
     read()
 end
 
@@ -417,9 +417,9 @@ SEARCH_STORAGE = get_arg_or(6, TYPES.BOOLEAN, SEARCH_STORAGE)
 
 MORE_INV_AMOUNT = get_arg_or(7, TYPES.INTEGER, MORE_INV_AMOUNT)
 
-TORCH_SLOT = get_arg_or(9, TYPES.INTEGER, TORCH_SLOT)
-MORE_INV_START_SLOT = get_arg_or(10, TYPES.INTEGER, MORE_INV_START_SLOT)
-SEARCH_CHEST_SLOT = get_arg_or(11, TYPES.INTEGER, SEARCH_CHEST_SLOT)
+MORE_INV_START_SLOT = get_arg_or(9, TYPES.INTEGER, MORE_INV_START_SLOT)
+SEARCH_CHEST_SLOT = get_arg_or(10, TYPES.INTEGER, SEARCH_CHEST_SLOT)
+TORCH_SLOT = get_arg_or(11, TYPES.INTEGER, TORCH_SLOT)
 
 FUEL_ACTION = get_arg_or(12, TYPES.INTEGER, FUEL_ACTION)
 
