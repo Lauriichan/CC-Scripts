@@ -47,17 +47,17 @@ TYPES = {
 
 local function get_arg(index, arg_type)
     if(#args < index) then
-        print("Expected argument of type '" .. arg_type["name"] .. "' at index " .. index .. "!")
+        print("Expected argument of type '" .. arg_type.name .. "' at index " .. index .. "!")
         return nil
     end
-    return arg_type["parse"](index, args[index])
+    return arg_type.parse(index, args[index])
 end
 
 local function get_arg_or(index, arg_type, default)
     if(#args < index) then
         return default
     end
-    return arg_type["parse"](index, args[index])
+    return arg_type.parse(index, args[index])
 end
 
 -- Argument Parsing
@@ -377,7 +377,7 @@ end
 
 LENGTH = get_arg_or(1, TYPES.INTEGER, LENGTH)
 WIDTH = get_arg_or(2, TYPES.INTEGER, WIDTH)
-HEIGHT = get_arg_or(3, TYPES.INTGER, HEIGHT)
+HEIGHT = get_arg_or(3, TYPES.INTEGER, HEIGHT)
 
 AUTO_REFUEL = get_arg_or(4, TYPES.BOOLEAN, AUTO_REFUEL)
 
