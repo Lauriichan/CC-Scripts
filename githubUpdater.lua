@@ -18,14 +18,15 @@ if(result.code == 404) then
     term.error("File " .. args[1] .. " doesn't exist!")
     return
 end
+local content = result.readAll()
+result.close()
 if(result.code ~= 200) then
     term.error("Couldn't download file " .. args[1] .. "!")
+    print(content);
     return
 end
-local content = result.readAll()
 local file = fs.open(name, "w")
 file.write(content)
 file.flush()
 file.close()
-result.close()
 term.success("Successfully downloaded file " .. args[1] .. " as " .. name .. "!")
