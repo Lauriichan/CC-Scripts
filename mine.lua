@@ -169,6 +169,7 @@ function place_torch()
     turtle.place()
     turtle.turnLeft()
     turtle.turnLeft()
+    return true
 end
 
 function has_torch()
@@ -298,13 +299,13 @@ function mine_forward()
 end
 
 function mine_up()
-    for i=1,HEIGHT do
+    for i=2,HEIGHT do
         while turtle.detectUp() do
             turtle.digUp()
         end
         turtle.up()
     end
-    for i=1,HEIGHT do
+    for i=2,HEIGHT do
         turtle.down()
     end
 end
