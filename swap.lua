@@ -26,6 +26,9 @@ end
 
 function place(id)
     if turtle.detect() then
+        if (turtle.inspect().name == id) then
+            return true
+        end
         turtle.dig()
     end
     if not selectNext(id) then
@@ -50,10 +53,6 @@ function main()
         return
     end
     id = id.name
-    if not place(id) then
-        print("No item")
-        return
-    end
     local right = false
     turtle.turnRight()
     if turtle.detect() then
