@@ -134,10 +134,11 @@ function store_inventory()
     turtle.turnLeft()
     turtle.turnLeft()
     break_front()
+    local continue = false
     for n=1,MORE_INV_AMOUNT do
          turtle.select(MORE_INV_START_SLOT + n)
          turtle.place()
-         local continue = false
+         continue = false
          for i=MORE_INV_START_SLOT + 2,16 do
              if (i == TORCH_SLOT and AUTO_TORCH) or (i == SEARCH_CHEST_SLOT and SEARCH_STORAGE) then
                  -- Do nothing because its a torch
@@ -153,6 +154,9 @@ function store_inventory()
             break
          end
     end
+    turtle.turnLeft()
+    turtle.turnLeft()
+    return (not continue)
 end
 
 function place_torch()
@@ -284,18 +288,21 @@ function go_front()
     break_front()
     if not store_inventory() then
         print("No free slots left")
-        return
+        return false
     end
     turtle.forward()
 end
 
 function mine_forward()
-    go_front()
+    if not go_front() then
+        return false
+    end
     mine_up()
     if not store_inventory() then
         print("No free slots left")
-        return
+        return false
     end
+    return true
 end
 
 function mine_up()
@@ -341,7 +348,9 @@ function main_loop()
         turtle.turnLeft()
         turtle.turnLeft()
         for i=2,left do
-            go_front()
+            if not go_front() then
+                return
+            end
         end
         for i=1,right do
             mine_forward()
@@ -349,10 +358,14 @@ function main_loop()
         turtle.turnLeft()
         turtle.turnLeft()
         for i=2,right do
-            go_front()
+            if not go_front() then
+                return
+            end
         end
         turtle.turnRight()
-        go_front()
+        if not go_front() then
+            return
+        end
     end
 end
 
