@@ -82,11 +82,11 @@ function break_to(slot)
     if (free_slot == nil) then
         return false
     end
+    turtle.select(free_slot)
     turtle.dig()
     if (free_slot == slot) then
         return true
     end
-    turtle.select(free_slot)
     turtle.transferTo(slot)
     return true
 end
