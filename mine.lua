@@ -378,7 +378,7 @@ function print_config()
     term.clear()
     local color = term.getTextColor()
     term.setTextColor(colors.purple)
-    print("==========================================")
+    print("=======================================")
     print("Tunnel " .. WIDTH .. "x" .. HEIGHT .. " - " .. LENGTH .. " Blöcke lang")
     print("")
     print("Refuel: " .. name(AUTO_REFUEL))
@@ -388,7 +388,7 @@ function print_config()
     print("Extra Inventories (Start Slot " .. MORE_INV_START_SLOT .. "): " .. MORE_INV_AMOUNT)
     print("")
     print("Calculated Fuel per Layer (x" .. FUEL_ACTION .. "): " .. AUTO_REFUEL_THRESHHOLD)
-    print("==========================================")
+    print("=======================================")
     print("Press enter to start...")
     term.setTextColor(color)
     read()
@@ -417,11 +417,11 @@ SEARCH_STORAGE = get_arg_or(6, TYPES.BOOLEAN, SEARCH_STORAGE)
 
 MORE_INV_AMOUNT = get_arg_or(7, TYPES.INTEGER, MORE_INV_AMOUNT)
 
-MORE_INV_START_SLOT = get_arg_or(9, TYPES.INTEGER, MORE_INV_START_SLOT)
-SEARCH_CHEST_SLOT = get_arg_or(10, TYPES.INTEGER, SEARCH_CHEST_SLOT)
-TORCH_SLOT = get_arg_or(11, TYPES.INTEGER, TORCH_SLOT)
+MORE_INV_START_SLOT = get_arg_or(8, TYPES.INTEGER, MORE_INV_START_SLOT)
+SEARCH_CHEST_SLOT = get_arg_or(9, TYPES.INTEGER, SEARCH_CHEST_SLOT)
+TORCH_SLOT = get_arg_or(10, TYPES.INTEGER, TORCH_SLOT)
 
-FUEL_ACTION = get_arg_or(12, TYPES.INTEGER, FUEL_ACTION)
+FUEL_ACTION = get_arg_or(11, TYPES.INTEGER, FUEL_ACTION)
 
 AUTO_REFUEL_THRESHHOLD = WIDTH * HEIGHT * FUEL_ACTION
 
