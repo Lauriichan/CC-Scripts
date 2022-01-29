@@ -391,7 +391,7 @@ function print_config()
     print("==========================================")
     term.setTextColor(color)
     print("Press enter to continue...")
-    io.read()
+    read()
 end
 
 function name(state)
