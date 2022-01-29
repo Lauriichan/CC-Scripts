@@ -374,6 +374,35 @@ function main_loop()
     end
 end
 
+function print_config()
+    term.clear()
+    local color = term.getTextColor()
+    term.setTextColor(colors.purple)
+    print("================================================================")
+    print("Tunnel " .. WIDTH .. "x" .. HEIGHT .. " - " .. LENGTH .. " Blöcke lang")
+    print("")
+    print("Refuel: " .. name(AUTO_REFUEL))
+    print("Torches (Slot " .. TORCH_SLOT .. "): " .. name(AUTO_TORCH))
+    print("Search Storage (Slot " .. SEARCH_CHEST_SLOT .. "): " .. name(SEARCH_STORAGE))
+    print("")
+    print("Extra Inventories (Start Slot " .. MORE_INV_START_SLOT .. "): " .. MORE_INV_AMOUNT)
+    print("")
+    print("Calculated Fuel per Layer (x" .. FUEL_ACTION .. "): " .. AUTO_REFUEL_THRESHHOLD)
+    print("================================================================")
+    term.setTextColor(color)
+    print("Press enter to continue...")
+    io.input()
+end
+
+function name(state)
+    -- Normally I wouldn't do it like this
+    -- However "state" can be nil therefore I have to check
+    if (state == true) then 
+        return "yes"
+    end
+    return "no"
+end
+
 -- Functions
 
 -- Start
@@ -395,6 +424,8 @@ SEARCH_CHEST_SLOT = get_arg_or(11, TYPES.INTEGER, SEARCH_CHEST_SLOT)
 FUEL_ACTION = get_arg_or(12, TYPES.INTEGER, FUEL_ACTION)
 
 AUTO_REFUEL_THRESHHOLD = WIDTH * HEIGHT * FUEL_ACTION
+
+print_config()
 
 main_loop()
 
