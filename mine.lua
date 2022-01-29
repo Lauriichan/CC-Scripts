@@ -291,6 +291,7 @@ function go_front()
         return false
     end
     turtle.forward()
+    return true
 end
 
 function mine_forward()
