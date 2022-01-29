@@ -78,7 +78,7 @@ TORCH_SLOT = 16
 TORCH_THRESHHOLD = 6
 
 MORE_INV_AMOUNT = 0
-MORE_INV_START_SLOT = 1
+MORE_INV_START_SLOT = 0 -- Has to be lower than the index
 
 SEARCH_STORAGE = false
 SEARCH_CHEST_SLOT = 15
@@ -95,11 +95,11 @@ end
 
 function break_to(slot)
     local free_slot = get_free_slot()
-    if free_slot == nil then
+    if (free_slot == nil) then
         return false
     end
     turtle.dig()
-    if free_slot == slot then
+    if (free_slot == slot) then
         return true
     end
     turtle.select(free_slot)
@@ -109,7 +109,7 @@ end
 
 function get_free_slot()
     local free_slot = 1
-    while not turtle.getItemCount(free_slot) == 0 do
+    while not (turtle.getItemCount(free_slot) == 0) do
         free_slot = free_slot + 1
         if free_slot == 17 then
             return nil
@@ -119,9 +119,9 @@ function get_free_slot()
 end
 
 function store_inventory()
-    if not MORE_INV_AMOUNT > 0 then
+    if not (MORE_INV_AMOUNT > 0) then
         local free = false
-        for i=MORE_INV_START_SLOT + 1,16 do
+        for i=1,16 do
             if (i == TORCH_SLOT and AUTO_TORCH) or (i == SEARCH_CHEST_SLOT and SEARCH_STORAGE) then
                 -- Do nothing because its a torch
             else
@@ -134,7 +134,7 @@ function store_inventory()
         return free -- Inventory is still free
     end
     local free = false
-    for i=MORE_INV_START_SLOT + 1,16 do
+    for i=MORE_INV_START_SLOT + 2,16 do
         if (i == TORCH_SLOT and AUTO_TORCH) or (i == SEARCH_CHEST_SLOT and SEARCH_STORAGE) then
             -- Do nothing because its a torch
         else
@@ -150,11 +150,11 @@ function store_inventory()
     turtle.turnLeft()
     turtle.turnLeft()
     break_front()
-    for n=0,MORE_INV_AMOUNT do
+    for n=1,MORE_INV_AMOUNT do
          turtle.select(MORE_INV_START_SLOT + n)
          turtle.place()
          local continue = false
-         for i=MORE_INV_START_SLOT + 1,16 do
+         for i=MORE_INV_START_SLOT + 2,16 do
              if (i == TORCH_SLOT and AUTO_TORCH) or (i == SEARCH_CHEST_SLOT and SEARCH_STORAGE) then
                  -- Do nothing because its a torch
              else
@@ -188,7 +188,7 @@ function place_torch()
 end
 
 function has_torch()
-    if turtle.getItemCount(TORCH_SLOT) > 0 then
+    if (turtle.getItemCount(TORCH_SLOT) > 0) then
         return true
     end
     if search_inventory("torch", TORCH_SLOT) then
@@ -201,10 +201,10 @@ function refuel()
     if not AUTO_REFUEL then
         return true
     end
-    if turtle.getFuelLevel() > AUTO_REFUEL_THRESHHOLD then
+    if (turtle.getFuelLevel() > AUTO_REFUEL_THRESHHOLD) then
         return true
     end
-    for i=MORE_INV_START_SLOT + 1,16 do
+    for i=MORE_INV_START_SLOT + 2,16 do
         if (i == TORCH_SLOT and AUTO_TORCH) or (i == SEARCH_CHEST_SLOT and SEARCH_STORAGE) then
             -- Do nothing because its a torch
         else
@@ -212,14 +212,14 @@ function refuel()
             turtle.refuel()
         end
     end
-    if turtle.getFuelLevel() > AUTO_REFUEL_THRESHHOLD then
+    if (turtle.getFuelLevel() > AUTO_REFUEL_THRESHHOLD) then
         return true
     end
     local free_slot = get_free_slot()
-    if free_slot == nil then
+    if (free_slot == nil) then
         return false
     end
-    while turtle.getFuelLevel() < AUTO_REFUEL_THRESHHOLD do
+    while (turtle.getFuelLevel() < AUTO_REFUEL_THRESHHOLD) do
         if search_inventory("coal", free_slot) then
             turtle.select(free_slot)
             turtle.refuel()
@@ -244,13 +244,13 @@ function search_inventory(id, slot)
     turtle.turnLeft()
     break_front()
     local found = false
-    for n=0,MORE_INV_AMOUNT do
+    for n=1,MORE_INV_AMOUNT do
          turtle.select(MORE_INV_START_SLOT + n)
          turtle.place()
          turtle.select(slot)
          turtle.suck()
          local detail;
-         while not turtle.getItemCount(slot) == 0 do
+         while not (turtle.getItemCount(slot) == 0) do
             detail = turtle.getItemDetail(slot)
             if (detail.name == mcId) then
                 found = true
@@ -270,7 +270,7 @@ function search_inventory(id, slot)
          turtle.turnLeft()
          turtle.turnLeft()
          turtle.suck()
-         while not turtle.getItemCount(transfer) == 0 do
+         while not (turtle.getItemCount(transfer) == 0) do
             turtle.turnLeft()
             turtle.turnLeft()
             turtle.drop()
@@ -335,10 +335,10 @@ function main_loop()
 
     local left = math.floor(WIDTH / 2)
     local right = WIDTH - left
-    while blocks < LENGTH do
+    while (blocks < LENGTH) do
         torch = torch + 1
         blocks = blocks + 1
-        if not torch < TORCH_THRESHHOLD then
+        if not (torch < TORCH_THRESHHOLD) then
             torch = 0
             if not place_torch() then
                 print("No torches left")
@@ -385,7 +385,7 @@ AUTO_TORCH = get_arg_or(5, TYPES.BOOLEAN, AUTO_TORCH)
 TORCH_SLOT = get_arg_or(6, TYPES.INTEGER, TORCH_SLOT)
 
 MORE_INV_AMOUNT = get_arg_or(7, TYPES.INTEGER, MORE_INV_AMOUNT)
-MORE_INV_START_SLOT = get_arg_or(8, TYPES.INTEGER, MORE_INV_AMOUNT)
+MORE_INV_START_SLOT = get_arg_or(8, TYPES.INTEGER, MORE_INV_START_SLOT)
 
 FUEL_ACTION = get_arg_or(9, TYPES.INTEGER, FUEL_ACTION)
 
