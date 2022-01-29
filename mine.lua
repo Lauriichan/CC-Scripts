@@ -267,6 +267,8 @@ function search_inventory(id, slot)
             turtle.turnLeft()
             turtle.suck()
          end
+         turtle.turnLeft()
+         turtle.turnLeft()
          break_to(MORE_INV_START_SLOT + n) -- No check because we know we are free
          if not found then
             break
