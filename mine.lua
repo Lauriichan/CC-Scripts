@@ -6,40 +6,24 @@ TYPES = {
     STRING = {
         name = "string",
         parse = function(idx, argument)
-            if not (type(argument) == "string") then
-                print("Expected string at argument " .. idx .. "!")
-                return nil;
-            end
             return argument;
         end,
     },
     INTEGER = {
         name = "integer",
         parse = function(idx, argument)
-            if not (type(argument) == "number") then
-                print("Expected number at argument " .. idx .. "!")
-                return nil;
-            end
             return math.floor(tonumber(argument));
         end,
     },
     DECIMAL = {
         name = "decimal",
         parse = function(idx, argument)
-            if not (type(argument) == "number") then
-                print("Expected number at argument " .. idx .. "!")
-                return nil;
-            end
             return tonumber(argument);
         end,
     },
     BOOLEAN = {
         name = "boolean",
         parse = function(idx, argument)
-            if not (type(argument) == "boolean") then
-                print("Expected boolean at argument " .. idx .. "!")
-                return nil;
-            end
             return string.match(argument,"[tT][rR][uU][eE]") ~= nil
         end
     }
