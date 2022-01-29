@@ -47,17 +47,17 @@ TYPES = {
 
 local function get_arg(index, arg_type)
     if(#args < index) then
-        print("Expected argument of type '" .. arg_type.name .. "' at index " .. index .. "!")
+        print("Expected argument of type '" .. arg_type["name"] .. "' at index " .. index .. "!")
         return nil
     end
-    return arg_type.parse(index, args[index])
+    return arg_type["parse"](index, args[index])
 end
 
 local function get_arg_or(index, arg_type, default)
     if(#args < index) then
         return default
     end
-    return arg_type.parse(index, args[index])
+    return arg_type["parse"](index, args[index])
 end
 
 -- Argument Parsing
