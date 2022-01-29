@@ -78,7 +78,7 @@ function main()
         if record then
             size = size + 1
         else 
-            if placeTorch() then
+            if placeTorch(row, space, size) then
                 high = true
             end
             space = space + 1
