@@ -52,7 +52,7 @@ LENGTH = 12
 
 WIDTH = 3
 HEIGHT = 3
-FUEL_ACTION = 8
+FUEL_ACTION = 4
 
 AUTO_REFUEL = false
 AUTO_REFUEL_THRESHHOLD = WIDTH * HEIGHT * FUEL_ACTION
@@ -243,6 +243,7 @@ function search_inventory(id, slot)
             detail = turtle.getItemDetail(slot)
             if (detail.name == mcId) then
                 found = true
+                break
             end
             turtle.turnLeft()
             turtle.turnLeft()
@@ -277,6 +278,7 @@ function search_inventory(id, slot)
     turtle.turnLeft()
     turtle.turnLeft()
     break_to(SEARCH_CHEST_SLOT)
+    turtle.turnLeft()
     return found
 end
 
