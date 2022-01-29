@@ -17,7 +17,7 @@ if(#args >= 2) then
 end
 local url = GITHUB_URL .. args[1] .. EXTENSION
 local result = http.get(url)
-if (!result) then
+if (not result) then
     term.setTextColor(colors.red)
     print("Failed to connect to '" .. url .. "'!")
     term.setTextColor(col)
