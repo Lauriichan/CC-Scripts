@@ -97,7 +97,7 @@ function main()
                 tries = tries + 1
             end
             turnSide(side)
-            side = ~side
+            side = !side
         else
             turtle.forward()
         end
