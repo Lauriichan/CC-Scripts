@@ -37,10 +37,10 @@ end
 
 function turnSide(right)
     if right then
-        turtle.turnRight()
+        turtle.turnLeft()
         return
     end
-    turtle.turnLeft()
+    turtle.turnRight()
 end
 
 function main()
