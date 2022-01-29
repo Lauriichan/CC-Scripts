@@ -355,7 +355,7 @@ function main_loop()
         end
         turtle.turnLeft()
         turtle.turnLeft()
-        for i=1,left do
+        for i=2,left do
             go_front()
         end
         for i=1,right do
@@ -363,7 +363,7 @@ function main_loop()
         end
         turtle.turnLeft()
         turtle.turnLeft()
-        for i=1,right do
+        for i=2,right do
             go_front()
         end
         turtle.turnRight()
@@ -380,14 +380,16 @@ WIDTH = get_arg_or(2, TYPES.INTEGER, WIDTH)
 HEIGHT = get_arg_or(3, TYPES.INTEGER, HEIGHT)
 
 AUTO_REFUEL = get_arg_or(4, TYPES.BOOLEAN, AUTO_REFUEL)
-
 AUTO_TORCH = get_arg_or(5, TYPES.BOOLEAN, AUTO_TORCH)
-TORCH_SLOT = get_arg_or(6, TYPES.INTEGER, TORCH_SLOT)
+SEARCH_STORAGE = get_arg_or(6, TYPES.BOOLEAN, SEARCH_STORAGE)
 
 MORE_INV_AMOUNT = get_arg_or(7, TYPES.INTEGER, MORE_INV_AMOUNT)
-MORE_INV_START_SLOT = get_arg_or(8, TYPES.INTEGER, MORE_INV_START_SLOT)
 
-FUEL_ACTION = get_arg_or(9, TYPES.INTEGER, FUEL_ACTION)
+TORCH_SLOT = get_arg_or(9, TYPES.INTEGER, TORCH_SLOT)
+MORE_INV_START_SLOT = get_arg_or(10, TYPES.INTEGER, MORE_INV_START_SLOT)
+SEARCH_CHEST_SLOT = get_arg_or(11, TYPES.INTEGER, SEARCH_CHEST_SLOT)
+
+FUEL_ACTION = get_arg_or(12, TYPES.INTEGER, FUEL_ACTION)
 
 AUTO_REFUEL_THRESHHOLD = WIDTH * HEIGHT * FUEL_ACTION
 
