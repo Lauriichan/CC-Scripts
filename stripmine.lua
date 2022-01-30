@@ -458,18 +458,18 @@ function mine(side, current, current_hall)
         return -1
     end
     break_up()
-    if current_hall == 0 then
-        turnSide(side)
-        for i=1,(DEPTH * 2 + 2) do
-            if not go_front() then
-                return -1
-            end
-            break_up()
-        end
-        turnSide(side)
-        return 1
-    end
     if current == 0 then
+        if current_hall == 0 then
+            turnSide(side)
+            for i=1,(DEPTH * 2 + 2) do
+                if not go_front() then
+                    return -1
+                end
+                break_up()
+            end
+            turnSide(side)
+            return 1
+        end
         turtle.up()
         turtle.turnLeft()
         if not mine_forward() then
