@@ -440,6 +440,7 @@ function mine(side, current, current_hall)
         turtle.turnLeft()
         go_back()
         turtle.turnRight()
+        turtle.down()
         return 1
     end
     return 0
@@ -522,8 +523,9 @@ end
 -- Start
 
 HALLS = get_arg_or(1, TYPES.INTEGER, HALLS)
-DEPTH = get_arg_or(2, TYPES.INTEGER, DEPTH)
-HALL_UNTIL_SWITCH = get_arg_or(3, TYPES.INTEGER, HALL_UNTIL_SWITCH)
+HALL_UNTIL_SWITCH = get_arg_or(2, TYPES.INTEGER, HALL_UNTIL_SWITCH)
+
+DEPTH = get_arg_or(3, TYPES.INTEGER, DEPTH)
 
 AUTO_REFUEL = get_arg_or(4, TYPES.BOOLEAN, AUTO_REFUEL)
 AUTO_TORCH = get_arg_or(5, TYPES.BOOLEAN, AUTO_TORCH)
