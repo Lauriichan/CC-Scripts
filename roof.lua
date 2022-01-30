@@ -60,6 +60,7 @@ function main()
         right = true
     end
     turtle.turnLeft()
+    turtle.turnLeft()
     local swapped = false
     while true do
         if not place(id) then
@@ -71,10 +72,13 @@ function main()
                 break
             end
             turnSide(right)
-            swapped = true
             if turtle.detect() then
                 break
             end
+            turtle.forward()
+            turnSide(right)
+            right = not right
+            swapped = true
         else
             turtle.forward()
             swapped = false
