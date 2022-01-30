@@ -304,9 +304,77 @@ function break_up()
     end
 end
 
+function is_ore(block)
+    if not (block) then
+        return false
+    end
+    local tags = block.tags
+    if not (tags) then
+        return false
+    end
+    for i=1,#tags do
+        if (string.find(tags[i], "^forge:ores")) then
+            return true
+        end
+    end
+    return false
+end
+
+function mine_ore_front()
+    local _, block = turtle.inspect()
+    if is_ore(block) then
+        turtle.dig()
+    end
+    if not store_inventory() then
+        print("No free slots left")
+        return false
+    end
+    return true
+end
+
+function mine_ore_down()
+    local _, block = turtle.inspectDown()
+    if is_ore(block) then
+        turtle.dig()
+    end
+    if not store_inventory() then
+        print("No free slots left")
+        return false
+    end
+    return true
+end
+
+function mine_ore_up()
+    local _, block = turtle.inspectUp()
+    if is_ore(block) then
+        turtle.digUp()
+    end
+    if not store_inventory() then
+        print("No free slots left")
+        return false
+    end
+    return true
+end
+
 function mine_forward()
     for i = 1,DEPTH do
         if not go_front() then
+            return false
+        end
+        turtle.turnLeft()
+        if not mine_ore_front() then
+            return false
+        end
+        turtle.turnLeft()
+        turtle.turnLeft()
+        if not mine_ore_front() then
+            return false
+        end
+        turtle.turnRight()
+        if not mine_ore_up() then
+            return false
+        end
+        if not mine_ore_down() then
             return false
         end
     end
