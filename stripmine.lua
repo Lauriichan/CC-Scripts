@@ -65,6 +65,7 @@ WHITELISTED_ITEMS = {
     ["druidcraft:moonstone"] = true,
     ["druidcraft:brightstone"] = true,
     ["forbidden_arcanus:arcane_crystal"] = true,
+    ["forbidden_arcanus:xpetrified_orb"] = true,
     ["mysticalworld:lustrous_pearl"] = true,
     ["mysticalworld:sapphire"] = true
 }
