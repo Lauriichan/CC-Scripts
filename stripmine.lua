@@ -67,7 +67,8 @@ WHITELISTED_ITEMS = {
     ["forbidden_arcanus:arcane_crystal"] = true,
     ["forbidden_arcanus:xpetrified_orb"] = true,
     ["mysticalworld:lustrous_pearl"] = true,
-    ["mysticalworld:sapphire"] = true
+    ["mysticalworld:sapphire"] = true,
+    ["tetra:geode"] = true
 }
 
 FUEL_ITEMS = {
