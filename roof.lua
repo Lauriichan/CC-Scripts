@@ -47,14 +47,6 @@ function turnSide(right)
     turtle.turnRight()
 end
 
-function turnSide(side)
-    if side then
-        turtle.turnLeft()
-        return
-    end
-    turtle.turnRight()
-end
-
 function main()
     local id = turtle.getItemDetail(SAMPLE_SLOT)
     if not id then
@@ -79,12 +71,10 @@ function main()
                 break
             end
             turnSide(right)
+            swapped = true
             if turtle.detect() then
                 break
             end
-            turtle.forward()
-            turnSide(right)
-            right = not right
         else
             swapped = false
         end
