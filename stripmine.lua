@@ -69,6 +69,15 @@ WHITELISTED_ITEMS = {
     ["mysticalworld:sapphire"] = true
 }
 
+FUEL_ITEMS = {
+    ["minecraft:coal"] = true,
+    ["druidcraft:fiery_glass"] = true
+}
+
+TORCH_ITEMS = {
+    ["minecraft:torch"] = true
+}
+
 HALLS = 24
 DEPTH = 4
 HALL_UNTIL_SWITCH = 8
@@ -226,7 +235,7 @@ function has_torch()
     if (turtle.getItemCount(TORCH_SLOT) > 0) then
         return true
     end
-    if search_inventory("torch", TORCH_SLOT) then
+    if search_inventory(TORCH_ITEMS, TORCH_SLOT) then
         return true
     end
     return false
@@ -255,7 +264,7 @@ function refuel()
         return false
     end
     while (turtle.getFuelLevel() < AUTO_REFUEL_THRESHHOLD) do
-        if search_inventory("coal", free_slot) then
+        if search_inventory(FUEL_ITEMS, free_slot) then
             turtle.select(free_slot)
             turtle.refuel()
         else
@@ -266,11 +275,10 @@ function refuel()
 end
 
 
-function search_inventory(id, slot)
+function search_inventory(ids, slot)
     if not SEARCH_STORAGE then
         return false
     end
-    local mcId = "minecraft:" .. id
     turtle.turnRight()
     break_front()
     turtle.select(SEARCH_CHEST_SLOT)
@@ -287,7 +295,7 @@ function search_inventory(id, slot)
          local detail;
          while not (turtle.getItemCount(slot) == 0) do
             detail = turtle.getItemDetail(slot)
-            if (detail.name == mcId) then
+            if (ids[detail.name]) then
                 found = true
                 break
             end
@@ -423,6 +431,9 @@ function mine_forward()
         if not mine_ore_down() then
             return false
         end
+    end
+    if not mine_ore_front() then
+        return false
     end
     return true
 end
