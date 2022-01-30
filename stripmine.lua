@@ -134,6 +134,7 @@ function store_inventory()
     turtle.turnLeft()
     turtle.turnLeft()
     break_front()
+    break_up()
     local continue = false
     for n=1,MORE_INV_AMOUNT do
          turtle.select(MORE_INV_START_SLOT + n)
@@ -144,9 +145,21 @@ function store_inventory()
                  -- Do nothing because its a torch
              else
                 turtle.select(i);
-                 if not turtle.drop() then
-                    continue = true;
-                 end
+                if turtle.placeUp() then
+                    local _, block = turtle.inspectUp()
+                    turtle.digUp()
+                    if not is_ore(block) then
+                        turtle.dropDown()
+                    else
+                        if not turtle.drop() then
+                            continue = true;
+                        end
+                    end
+                else
+                    if not turtle.drop() then
+                        continue = true;
+                    end
+                end
              end
          end
          break_to(MORE_INV_START_SLOT + n) -- No check because we know we are free
@@ -304,11 +317,11 @@ function break_up()
     end
 end
 
-function is_ore(block)
-    if not (block) then
+function is_ore(obj)
+    if not (obj) then
         return false
     end
-    local tags = block.tags
+    local tags = obj.tags
     if not (tags) then
         return false
     end
