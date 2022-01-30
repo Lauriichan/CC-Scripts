@@ -383,7 +383,7 @@ function mine_forward()
         if not mine_ore_front() then
             return false
         end
-        turtle.turnRight()
+        turtle.turnLeft()
         if not mine_ore_up() then
             return false
         end
@@ -448,7 +448,7 @@ end
 function main_loop()
     move_to_floor() -- Go down to floor
 
-    local blocks = 0
+    local total_halls = 0
     local torch = 0
 
     local current = 0
@@ -457,9 +457,8 @@ function main_loop()
     local side = false
 
     local tmp = 0
-    while (blocks < LENGTH) do
+    while (total_halls < HALLS) do
         torch = torch + 1
-        blocks = blocks + 1
         if not refuel() then
             print("No fuel left")
             return
@@ -476,6 +475,7 @@ function main_loop()
             end
         end
         current_hall = current_hall + tmp
+        total_halls = total_halls + tmp
         if (current_hall == HALL_UNTIL_SWITCH) then
             current_hall = 0
             side = not side
