@@ -358,8 +358,8 @@ function is_ore(obj)
     if not (tags) then
         return false
     end
-    for i=1,#tags do
-        if ((string.find(tags[i], "^forge:ores")) ~= nil) then
+    for name, i in pairs(tags) do
+        if (string.find(name, "^forge:ores") ~= nil) then
             return true
         end
     end
