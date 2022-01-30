@@ -48,6 +48,27 @@ end
 
 -- Globals
 
+WHITELISTED_ITEMS = {
+    ["minecraft:coal"] = true,
+    ["minecraft:lapis_lazuli"] = true,
+    ["minecraft:diamond"] = true,
+    ["minecraft:redstone"] = true,
+    ["minecraft:emerald"] = true,
+    ["powah:uraninite_raw_poor"] = true,
+    ["powah:uraninite_raw"] = true,
+    ["powah:uraninite_raw_dense"] = true,
+    ["mekanism:fluorite_gem"] = true,
+    ["astralsorcery:aquamarine"] = true,
+    ["astralsorcery:amber_gem"] = true,
+    ["druidcraft:fiery_glass"] = true,
+    ["druidcraft:amber"] = true,
+    ["druidcraft:moonstone"] = true,
+    ["druidcraft:brightstone"] = true,
+    ["forbidden_arcanus:arcane_crystal"] = true,
+    ["mysticalworld:lustrous_pearl"] = true,
+    ["mysticalworld:sapphire"] = true
+}
+
 HALLS = 24
 DEPTH = 4
 HALL_UNTIL_SWITCH = 8
@@ -100,6 +121,14 @@ function get_free_slot()
         end
     end
     return free_slot
+end
+
+function is_whitelisted_item(slot)
+    local item = turtle.getItemDetail(slot)
+    if (item == nil) then
+        return false
+    end
+    return WHITELISTED_ITEMS[item.name]
 end
 
 function store_inventory()
@@ -156,8 +185,12 @@ function store_inventory()
                         end
                     end
                 else
-                    if not turtle.drop() then
-                        continue = true;
+                    if not is_whitelisted_item(i) then
+                        turtle.dropDown()
+                    else
+                        if not turtle.drop() then
+                            continue = true;
+                        end
                     end
                 end
              end
@@ -326,7 +359,7 @@ function is_ore(obj)
         return false
     end
     for i=1,#tags do
-        if (string.find(tags[i], "^forge:ores")) then
+        if ((string.find(tags[i], "^forge:ores")) ~= nil) then
             return true
         end
     end
