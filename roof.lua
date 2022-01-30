@@ -76,6 +76,7 @@ function main()
                 break
             end
         else
+            turtle.forward()
             swapped = false
         end
     end
