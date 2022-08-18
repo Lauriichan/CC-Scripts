@@ -28,11 +28,7 @@ function tryNextColumn(side)
     end
     turtle.forward()
     turnSide(side)
-    if turtle.detect() then
-        return false
-    end
-    turtle.forward()
-    return turtle.detectDown()
+    return not turtle.detectDown()
 end
 
 function main() 
@@ -43,6 +39,13 @@ function main()
         if turtle.getFuelLevel() < 50 then
             reason = "Fuel level too low"
             break
+        end
+        if turtle.detect() then 
+            if not tryNextColumn(side) then
+                reason = "Space completely filled"
+                break
+            end
+            side = not side
         end
         turtle.forward()
         if turtle.detectDown() then
@@ -62,10 +65,10 @@ function main()
     print("=======================================")
     print("")
     print("Stopped working!")
-    print("Reason: " + reason)
+    print("Reason: " .. reason)
     print("")
-    print("Fuel remaining: " + turtle.getFuelLevel())
-    print("Total blocks placed: " + placed)
+    print("Fuel remaining: " .. turtle.getFuelLevel())
+    print("Total blocks placed: " .. placed)
     print("")
     print("=======================================")
 end
