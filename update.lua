@@ -15,23 +15,41 @@ local name = args[1]
 if(#args >= 2) then
     name = args[2]
 end
-local url = GITHUB_URL .. args[1] .. EXTENSION
-local result = http.get(url)
-if not (result) then
-    term.setTextColor(colors.red)
-    print("Failed to connect to '" .. url .. "'!")
-    term.setTextColor(col)
-    return;
+local gitUrl = GITHUB_URL .. args[1] .. EXTENSION
+
+http.request{
+    url = gitUrl
+    method = "GET"
+}
+
+local handle = nil;
+while true do
+    event, resUrl, sHandle, fHandle = os.pullEvent()
+    if (event == "http_success" || event == "http_failure" && resUrl = gitUrl then
+        if (event == "http_failure") then
+            handle = fHandle
+        else
+            handle = sHandle
+        end
+        break
+    end
 end
-if(result.getResponseCode() == 404) then
+
+if not handle then 
+    term.setTextColor(colors.red)
+    print("Failed to connect to '" .. gitUrl .. "'!")
+    term.setTextColor(col)
+    return
+end
+if handle.getResponseCode() == 404 then
     term.setTextColor(colors.red)
     print("File " .. args[1] .. " doesn't exist!")
     term.setTextColor(col)
     return
 end
-local content = result.readAll()
-result.close()
-if(result.getResponseCode() ~= 200) then
+local content = handle.readAll()
+handle.close()
+if handle.getResponseCode() ~= 200 then
     term.setTextColor(colors.red)
     print("Couldn't download file " .. args[1] .. "!")
     print(content);
