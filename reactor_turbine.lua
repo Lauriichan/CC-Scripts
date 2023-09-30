@@ -26,7 +26,7 @@ while true do
     monitor.write("Stored: " + stored +  " FE");
 
     if (stored == capacity) then
-        ticks++;
+        ticks = ticks + 1;
         if (ticks > 50) then
             monitor.setCursor(0, centerY - 2);
             monitor.write("Disabled: " + ticks);
