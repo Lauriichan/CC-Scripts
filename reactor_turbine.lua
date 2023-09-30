@@ -10,10 +10,7 @@ local capacity = battery.capacity();
 
 local size = monitor.getSize();
 
-local width = size[0];
-local height = size[1];
-
-local centerY = (height / 2) - 3;
+local centerY = (size / 2) - 3;
 
 local ticks = 0;
 local stored = 0;
@@ -21,13 +18,13 @@ while true do
     sleep(0.5)
     stored = battery.stored();
 
-    monitor.setCursor(0, centerY);
+    monitor.setCursorPos(0, centerY);
     monitor.clearLine();
-    monitor.write("Capacity: " + capacity + " FE");
+    monitor.write("Capacity: " .. capacity .. " FE");
 
-    monitor.setCursor(0, centerY + 1);
+    monitor.setCursorPos(0, centerY + 1);
     monitor.clearLine();
-    monitor.write("Stored: " + stored +  " FE");
+    monitor.write("Stored: " .. stored ..  " FE");
 
     if (stored == capacity) then
         ticks = ticks + 1;
@@ -40,7 +37,7 @@ while true do
         redstone.setAnalogueOutput("bottom", 15);
         turbine.setActive(true);
     end
-    monitor.setCursor(0, centerY + 2);
+    monitor.setCursorPos(0, centerY + 2);
     monitor.clearLine();
-    monitor.write("Disabled: " + ticks);
+    monitor.write("Disabled: " .. ticks);
 end
