@@ -18,11 +18,11 @@ while true do
     sleep(0.5)
     stored = battery.stored();
 
-    monitor.setCursorPos(0, centerY);
+    monitor.setCursorPos(1, centerY);
     monitor.clearLine();
     monitor.write("Capacity: " .. capacity .. " FE");
 
-    monitor.setCursorPos(0, centerY + 1);
+    monitor.setCursorPos(1, centerY + 1);
     monitor.clearLine();
     monitor.write("Stored: " .. stored ..  " FE");
 
@@ -37,7 +37,11 @@ while true do
         redstone.setAnalogueOutput("bottom", 15);
         turbine.setActive(true);
     end
-    monitor.setCursorPos(0, centerY + 2);
+    monitor.setCursorPos(1, centerY + 2);
     monitor.clearLine();
-    monitor.write("Disabled: " .. ticks);
+    if (ticks > 10) {
+        monitor.write("Disabled: " .. ticks);
+    } else {
+        monitor.write("Enabled");
+    }
 end
