@@ -17,15 +17,12 @@ if(#args >= 2) then
 end
 local gitUrl = GITHUB_URL .. args[1] .. EXTENSION
 
-http.request{
-    url = gitUrl
-    method = "GET"
-}
+http.request{ url = gitUrl, method = "GET" }
 
 local handle = nil;
 while true do
     event, resUrl, sHandle, fHandle = os.pullEvent()
-    if (event == "http_success" || event == "http_failure" && resUrl = gitUrl then
+    if (event == "http_success" or event == "http_failure") and resUrl )= gitUrl then
         if (event == "http_failure") then
             handle = fHandle
         else
