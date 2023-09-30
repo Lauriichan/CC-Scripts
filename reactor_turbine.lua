@@ -14,6 +14,11 @@ local centerY = (size / 2) - 3;
 
 local ticks = 0;
 local stored = 0;
+
+if not turbine.active() then
+    turbine.setActive(true)
+end
+
 while true do
     sleep(0.5)
     stored = battery.stored();
