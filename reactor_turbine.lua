@@ -1,21 +1,21 @@
-turbine = peripheral.find("BiggerReactors_Turbine");
-montior = peripheral.wrap("left");
+local turbine = peripheral.find("BiggerReactors_Turbine");
+local montior = peripheral.wrap("left");
 
-battery = turbine.battery();
+local battery = turbine.battery();
 
 monitor.setCursorBlink(false);
 
-capacity = battery.capacity();
+local capacity = battery.capacity();
 
-size = monitor.getSize();
+local size = monitor.getSize();
 
-width = size[0];
-height = size[1];
+local width = size[0];
+local height = size[1];
 
-centerY = (height / 2) - 1;
+local centerY = (height / 2) - 1;
 
-ticks = 0;
-stored = 0;
+local ticks = 0;
+local stored = 0;
 while true do
     stored = battery.stored();
     monitor.clear();
